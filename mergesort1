@@ -1,0 +1,64 @@
+def merge_sort(array):
+    
+    # each recursive function needs a base case, here the base case we used to 
+    #make sure the array is neither less than 1 nor equal to 1 
+    #and if it is equal to 1 we just return it
+    if len(array) <1:
+        return -1
+    
+    if len(array) == 1:
+        return array
+
+    if len(array) > 1:
+        # we calculate the middle of the array using floor division
+        mid = len(array) // 2
+        
+        # here we are dividing the array into 2, left and right 
+        left_array = array[:mid]
+        right_array = array[mid:]
+        
+        # we recursively call each aray here
+        merge_sort(left_array)
+        merge_sort(right_array)
+        
+        # we are intializing the variables to check the indexes of each array
+        i = 0
+        j = 0
+        k = 0
+        
+        # we merge the two sorted arrays together here
+        while i < len(left_array) and j < len(right_array):
+            if left_array[i] < right_array[j]:
+                array[k] = left_array[i]
+                i += 1
+            else:
+                array[k] = right_array[j]
+                j += 1
+            k += 1
+        
+        # we check if there is any remaining elements in the left array
+        while i < len(left_array):
+            array[k] = left_array[i]
+            i += 1
+            k += 1
+        
+        # we check if there is any remaining elements in the right array
+        while j < len(right_array):
+            array[k] = right_array[j]
+            j += 1
+            k += 1
+
+def main():
+    
+    array = [32]
+    
+    print("Unsorted array is:", array)
+    
+    # we sort the array using merge_sort function
+    merge_sort(array)
+    
+
+    print("Sorted array is:", array)
+
+
+main()
